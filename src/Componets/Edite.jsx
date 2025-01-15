@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../App.css"
+import Swal from 'sweetalert2';
+import "../App.css";
 
 function Edite() {
   const { id } = useParams();
@@ -11,14 +12,46 @@ function Edite() {
     description: "",
   });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setOld({
+      ...old,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`https://blog-backend-sf2c.onrender.com/edite/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(old),
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        Swal.fire("Success!", "Blog updated successfully!", "success");
+        navigate("/own");
+      } else {
+        Swal.fire("Error", result.msg || "Failed to update the blog.", "error");
+      }
+    } catch (error) {
+      console.error("Error updating blog:", error);
+      Swal.fire("Error", "An error occurred while updating the blog.", "error");
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://blog-backend-sf2c.onrender.com/${id}`, {
+        const res = await fetch(`https://blog-backend-sf2c.onrender.com/edite/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-          },
+          }
         });
 
         if (!res.ok) {
@@ -29,45 +62,12 @@ function Edite() {
         setOld(data);
       } catch (error) {
         console.error("Error fetching blog data:", error);
-        alert("Unable to load the blog data.");
+        Swal.fire("Error", "Unable to load the blog data.", "error");
       }
     };
 
     fetchData();
   }, [id]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setOld((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch(`http://localhost:9595/edite/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(old),
-      });
-
-      const result = await res.json();
-      if (res.ok) {
-        alert("Blog updated successfully!");
-        navigate("/");
-      } else {
-        alert(result.msg || "Failed to update the blog.");
-      }
-    } catch (error) {
-      console.error("Error updating blog:", error);
-      alert("An error occurred while updating the blog.");
-    }
-  };
 
   return (
     <div className="edit-container">

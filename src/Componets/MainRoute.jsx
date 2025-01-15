@@ -17,7 +17,7 @@ function MainRoute() {
      <Route path='/add' element={<Add/>}></Route>
      <Route path='/own' element={<Own/>}></Route>
      <Route path='/single/:id' element={<Single/>}></Route>
-     <Route path='/edite/:id' element={<Edite/>}></Route>
+     <Route path='/edit/:id' element={<Edite/>}></Route>
     </Routes>
   )
 }

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+
 
 function Blog() {
   const token = localStorage.getItem("Token");
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log(state);
+  
 
   useEffect(() => {
     fetch("https://blog-backend-sf2c.onrender.com/blog", {
@@ -44,7 +48,9 @@ function Blog() {
       ) : (
         <div className="row">
           {state.map((el) => (
+            
             <div key={el._id} className="col-md-4 mb-4">
+              
               <div className="card h-100">
                 <img
                   src={el.image}
@@ -53,8 +59,11 @@ function Blog() {
                   style={{ height: "200px", objectFit: "cover" }}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{el.title}</h5>
-                  <p className="card-text">{el.description}</p>
+                  <h5 className="card-title">Title : {el.title}</h5>
+                  <p className="card-text">Description : {el.description}</p>
+                  <p className="card-author">By: {el.author}</p>
+                  <p className="card-date">Published on: {new Date(el.createdAt).toLocaleDateString()}</p>
+                  <p></p>
                 </div>
               </div>
             </div>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 function SignUp() {
   const [state, setState] = useState({
@@ -29,20 +31,20 @@ function SignUp() {
             body: JSON.stringify(state),
           });
       
-
           const data = await response.json();
       
           if (response.ok) {
-            alert("Data added successfully");
-            nav("/login"); 
+            Swal.fire("Success!", "Data added successfully.", "success");
+            nav("/login");
           } else {
-            alert("Error: " + data.message || "Something went wrong");
+            Swal.fire("Error!", data.message || "Something went wrong", "error");
           }
         } catch (error) {
           console.error("Error during sign up:", error);
-          alert("An error occurred while signing up.");
+          Swal.fire("Error!", "An error occurred while signing up.", "error");
         }
       };
+      
       
 
   return (
