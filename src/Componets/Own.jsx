@@ -11,7 +11,7 @@ function Own() {
   const [state, setState] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9595/own", {
+    fetch("https://blog-backend-sf2c.onrender.com/own", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

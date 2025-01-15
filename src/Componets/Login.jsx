@@ -24,7 +24,7 @@ function Login() {
 
   const submit = async (e) => {
     e.preventDefault();
-    await fetch('http://localhost:9595/login', {
+    await fetch('https://blog-backend-sf2c.onrender.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

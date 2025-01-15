@@ -14,7 +14,7 @@ function Edite() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:9595/edite/${id}`, {
+        const res = await fetch(`https://blog-backend-sf2c.onrender.com/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

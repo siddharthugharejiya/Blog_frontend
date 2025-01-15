@@ -6,7 +6,7 @@ function Blog() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:9595/blog", {
+    fetch("https://blog-backend-sf2c.onrender.com/blog", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -21,7 +21,7 @@ function SignUp() {
         e.preventDefault();
         
         try {
-          const response = await fetch("http://localhost:9595/register", {
+          const response = await fetch("https://blog-backend-sf2c.onrender.com/register", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

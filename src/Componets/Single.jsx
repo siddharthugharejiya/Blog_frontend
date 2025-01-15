@@ -7,7 +7,7 @@ function Single() {
 
   useEffect(() => {
     // Fetch the single blog data
-    fetch(`http://localhost:9595/single/${id}`)
+    fetch(`https://blog-backend-sf2c.onrender.com/single/${id}`)
       .then((res) => res.json())
       .then((res) => {
         setState(res);
@@ -20,7 +20,7 @@ function Single() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("Token");
-      const res = await fetch(`http://localhost:9595/del`, {
+      const res = await fetch(`https://blog-backend-sf2c.onrender.com/del`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

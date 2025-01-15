@@ -18,7 +18,7 @@ function Add() {
 
     const submit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:9595/add", {
+        fetch("https://blog-backend-sf2c.onrender.com/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
